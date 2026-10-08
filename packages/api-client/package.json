@@ -1,0 +1,23 @@
+{
+  "name": "@moments/api-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generated OpenAPI client + TanStack Query hooks for the Moments API (F6).",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "generate": "openapi-typescript spec/openapi.json -o src/generated.ts"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.62.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "openapi-typescript": "^7.4.0",
+    "react": "^18.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -15,7 +15,8 @@
     "format:check": "prettier --config packages/config/prettier.config.json --check .",
     "db:migrate": "pnpm --filter @moments/db run migrate",
     "db:seed": "pnpm --filter @moments/db run seed",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "gen:client": "pnpm --filter @moments/api run export:spec && pnpm --filter @moments/api-client run generate"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.0",
