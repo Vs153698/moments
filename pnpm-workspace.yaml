@@ -3,7 +3,10 @@ packages:
   - "packages/*"
 
 allowBuilds:
+  '@scarf/scarf': true
+  '@swc/core': true
   esbuild: true
+  msgpackr-extract: true
 
 onlyBuiltDependencies:
   - esbuild
