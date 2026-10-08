@@ -2,9 +2,24 @@
   "name": "@moments/db",
   "version": "0.0.0",
   "private": true,
-  "description": "Database schema, migrations and seed (implemented in F4 / KAN-24).",
+  "description": "Database schema (Drizzle), migrations and seed for Moments. PostgreSQL + PostGIS.",
   "scripts": {
-    "migrate": "node -e \"console.log('[db] migrate stub — implemented in KAN-24')\"",
-    "seed": "node -e \"console.log('[db] seed stub — implemented in KAN-24')\""
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "migrate": "drizzle-kit migrate",
+    "generate": "drizzle-kit generate",
+    "seed": "tsx src/seed.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.0",
+    "drizzle-kit": "^0.31.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
   }
 }
