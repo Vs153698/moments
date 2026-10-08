@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import type { Express } from "express";
@@ -14,7 +13,6 @@ async function bootstrap() {
 
   initSentry(env);
   app.use(helmet());
-  app.useGlobalPipes(new ValidationPipe({ whitelist: false, transform: false }));
 
   const config = new DocumentBuilder()
     .setTitle("Moments API")
