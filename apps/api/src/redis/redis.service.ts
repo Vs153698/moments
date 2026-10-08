@@ -6,8 +6,8 @@ import Redis from "ioredis";
 export class RedisService {
   readonly client: Redis | null;
 
-  constructor(url?: string) {
-    const redisUrl = url ?? process.env.REDIS_URL;
+  constructor() {
+    const redisUrl = process.env.REDIS_URL;
     this.client = redisUrl ? new Redis(redisUrl, { lazyConnect: false, maxRetriesPerRequest: 2 }) : null;
   }
 
