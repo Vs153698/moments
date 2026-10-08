@@ -1,10 +1,11 @@
 const tseslint = require("typescript-eslint");
 const boundaries = require("eslint-plugin-boundaries");
+const momentsPlugin = require("./eslint-plugin-moments");
 
 /**
  * Shared ESLint flat config for the Moments monorepo, including import
- * boundaries: apps may depend on packages, packages must stay acyclic and
- * never depend on apps (spec section 7).
+ * boundaries (apps may depend on packages, never the reverse — spec section 7)
+ * and query-safety rules (KAN-96).
  */
 module.exports = tseslint.config(
   {
@@ -12,7 +13,7 @@ module.exports = tseslint.config(
   },
   ...tseslint.configs.recommended,
   {
-    plugins: { boundaries },
+    plugins: { boundaries, "@moments": momentsPlugin },
     settings: {
       "boundaries/include": ["src/**/*"],
       "boundaries/elements": [
@@ -39,6 +40,7 @@ module.exports = tseslint.config(
           ],
         },
       ],
+      "@moments/no-select-star": "error",
     },
   },
 );
