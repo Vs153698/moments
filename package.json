@@ -14,7 +14,8 @@
     "test": "turbo run test",
     "format:check": "prettier --config packages/config/prettier.config.json --check .",
     "db:migrate": "pnpm --filter @moments/db run migrate",
-    "db:seed": "pnpm --filter @moments/db run seed"
+    "db:seed": "pnpm --filter @moments/db run seed",
+    "build": "turbo run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.0",

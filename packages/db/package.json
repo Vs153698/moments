@@ -4,12 +4,13 @@
   "private": true,
   "description": "Database schema (Drizzle), migrations and seed for Moments. PostgreSQL + PostGIS.",
   "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "eslint src",
-    "test": "vitest run",
-    "migrate": "drizzle-kit migrate",
+    "build": "tsc -p tsconfig.json",
     "generate": "drizzle-kit generate",
-    "seed": "tsx src/seed.ts"
+    "lint": "eslint src",
+    "migrate": "drizzle-kit migrate",
+    "seed": "tsx src/seed.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "drizzle-orm": "^0.44.0",
@@ -21,5 +22,7 @@
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
-  }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }
