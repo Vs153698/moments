@@ -1,0 +1,9 @@
+{
+  "name": "@moments/web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Moments web client. Landing/deep-link surfaces land in E14 (KAN-17 deps).",
+  "dependencies": {
+    "@moments/api-client": "workspace:*"
+  }
+}

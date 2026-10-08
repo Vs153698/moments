@@ -35,7 +35,18 @@ export class MomentsController {
       required: ["title"],
     },
   })
-  @ApiResponse({ status: 201, description: "Validated moment payload" })
+  @ApiResponse({
+    status: 201,
+    description: "Validated moment payload",
+    schema: {
+      type: "object",
+      properties: {
+        received: { type: "boolean" },
+        moment: { type: "object" },
+        receivedAt: { type: "string", format: "date-time" },
+      },
+    },
+  })
   @ApiResponse({ status: 400, description: "VALIDATION_ERROR" })
   @ApiResponse({ status: 429, description: "RATE_LIMITED" })
   create(@Body(new ZodValidationPipe(CreateMomentSchema)) body: CreateMomentInput) {

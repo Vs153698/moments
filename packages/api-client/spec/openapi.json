@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Health report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "ok",
+                        "degraded",
+                        "down"
+                      ]
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "uptimeSeconds": {
+                      "type": "number"
+                    },
+                    "checks": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Liveness/readiness probe with database, Redis and queue checks",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/v1/moments": {
+      "post": {
+        "operationId": "MomentsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Sunset chai at Marine Drive"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "hangout",
+                      "event",
+                      "trip",
+                      "celebration",
+                      "activity"
+                    ]
+                  },
+                  "privacy": {
+                    "type": "string",
+                    "enum": [
+                      "public",
+                      "invite_only",
+                      "private"
+                    ]
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Validated moment payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "received": {
+                      "type": "boolean"
+                    },
+                    "moment": {
+                      "type": "object"
+                    },
+                    "receivedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "VALIDATION_ERROR"
+          },
+          "429": {
+            "description": "RATE_LIMITED"
+          }
+        },
+        "summary": "Create a moment (validation demo — persistence in E04)",
+        "tags": [
+          "moments"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Moments API",
+    "description": "Moments REST API — Phase 0 skeleton (F5/F6)",
+    "version": "0.1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {}
+  }
+}

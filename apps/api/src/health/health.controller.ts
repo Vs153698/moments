@@ -10,7 +10,19 @@ export class HealthController {
 
   @Get("health")
   @ApiOperation({ summary: "Liveness/readiness probe with database, Redis and queue checks" })
-  @ApiResponse({ status: 200, description: "Health report" })
+  @ApiResponse({
+    status: 200,
+    description: "Health report",
+    schema: {
+      type: "object",
+      properties: {
+        status: { type: "string", enum: ["ok", "degraded", "down"] },
+        version: { type: "string" },
+        uptimeSeconds: { type: "number" },
+        checks: { type: "object", additionalProperties: { type: "string" } },
+      },
+    },
+  })
   async check(): Promise<HealthCheckResult> {
     return this.health.check();
   }
