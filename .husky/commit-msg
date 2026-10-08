@@ -1,0 +1,3 @@
+#!/bin/sh
+# Conventional Commits enforcement (KAN-92). Locally via husky; CI checks PR titles.
+pnpm exec commitlint --edit "$1"

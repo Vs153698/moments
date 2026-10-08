@@ -8,6 +8,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "prepare": "husky",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
     "test": "turbo run test",
@@ -16,8 +17,12 @@
     "db:seed": "pnpm --filter @moments/db run seed"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.7.0",
+    "@commitlint/config-conventional": "^19.7.0",
     "@types/node": "^24.0.0",
     "eslint": "^9.20.0",
+    "eslint-plugin-boundaries": "^5.0.0",
+    "husky": "^9.1.0",
     "prettier": "^3.4.0",
     "turbo": "^2.4.0",
     "typescript": "^5.7.0",
