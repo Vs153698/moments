@@ -1,0 +1,10 @@
+{
+  "name": "@moments/db",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Database schema, migrations and seed (implemented in F4 / KAN-24).",
+  "scripts": {
+    "migrate": "node -e \"console.log('[db] migrate stub — implemented in KAN-24')\"",
+    "seed": "node -e \"console.log('[db] seed stub — implemented in KAN-24')\""
+  }
+}

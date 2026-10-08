@@ -1,0 +1,27 @@
+{
+  "name": "moments",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Moments \u2014 share life's moments. Turborepo + pnpm monorepo (API, mobile, web).",
+  "packageManager": "pnpm@11.15.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "format:check": "prettier --config packages/config/prettier.config.json --check .",
+    "db:migrate": "pnpm --filter @moments/db run migrate",
+    "db:seed": "pnpm --filter @moments/db run seed"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "eslint": "^9.20.0",
+    "prettier": "^3.4.0",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.0"
+  }
+}

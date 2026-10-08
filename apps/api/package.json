@@ -1,0 +1,15 @@
+{
+  "name": "@moments/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Moments REST API. NestJS skeleton lands in F5 / KAN-25 — placeholder module for now.",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
