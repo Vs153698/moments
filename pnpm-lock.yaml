@@ -51,7 +51,17 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@24.19.1)(jiti@2.6.1)(supports-color@7.2.0)(tsx@4.23.15)
 
-  packages/config: {}
+  packages/config:
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.19.1
+      eslint:
+        specifier: ^9.20.0
+        version: 9.39.5(jiti@2.6.1)(supports-color@7.2.0)
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@24.19.1)(jiti@2.6.1)(supports-color@7.2.0)(tsx@4.23.15)
 
   packages/db:
     dependencies:

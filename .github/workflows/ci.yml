@@ -9,6 +9,22 @@ jobs:
   quality:
     name: typecheck · lint · test · db
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:17-3.5-alpine
+        env:
+          POSTGRES_USER: moments
+          POSTGRES_PASSWORD: moments
+          POSTGRES_DB: moments
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U moments -d moments"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://moments:moments@localhost:5432/moments
     steps:
       - uses: actions/checkout@v4
 
