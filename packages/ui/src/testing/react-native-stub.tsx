@@ -23,8 +23,16 @@ export const Text = host("Text");
 export const Pressable = host("Pressable");
 export const ScrollView = host("ScrollView");
 export const Image = host("Image");
+export const ImageBackground = host("ImageBackground");
 export const TextInput = host("TextInput");
 export const ActivityIndicator = host("ActivityIndicator");
+
+/** Tests run as iOS so both social-entry buttons render by default. */
+export const Platform = {
+  OS: "ios" as string,
+  select: <T,>(options: Record<string, T>): T | undefined =>
+    options[Platform.OS] ?? options.default,
+};
 
 export function Modal({ visible, children }: AnyProps & { visible?: boolean }) {
   return visible ? React.createElement("Modal", {}, children) : null;
