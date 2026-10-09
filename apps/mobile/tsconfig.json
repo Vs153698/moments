@@ -1,0 +1,9 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "bundler"
+  },
+  "include": ["src", "index.js", "tailwind.config.js", "babel.config.js", "metro.config.js"]
+}
