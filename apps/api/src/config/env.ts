@@ -27,6 +27,14 @@ export const EnvSchema = z.object({
    * production, off in production. Dev testing only (owner directive).
    */
   DEV_OTP_ON_SCREEN: z.enum(["true", "false"]).optional(),
+  /** Social login (C1.1). Google / Apple native client IDs — secrets live in env only. */
+  GOOGLE_CLIENT_ID: z.string().min(1).optional(),
+  APPLE_CLIENT_ID: z.string().min(1).optional(),
+  /** HMAC secret for JWT access tokens. Ephemeral per boot when unset (dev); required in production. */
+  AUTH_JWT_SECRET: z.string().min(1).optional(),
+  /** Access-token lifetime in seconds (default 15 min) and refresh-token lifetime in days (default 30). */
+  ACCESS_TOKEN_TTL_SECONDS: z.coerce.number().int().positive().default(900),
+  REFRESH_TOKEN_TTL_DAYS: z.coerce.number().int().positive().default(30),
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
 });
 

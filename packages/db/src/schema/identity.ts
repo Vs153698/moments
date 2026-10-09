@@ -1,4 +1,4 @@
-import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, date, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
 const createdAt = timestamp("created_at", { withTimezone: true, mode: "string" })
@@ -20,6 +20,10 @@ export const users = pgTable("users", {
   locale: text("locale").notNull().default("en"),
   isCreator: boolean("is_creator").notNull().default(false),
   isVerified: boolean("is_verified").notNull().default(false),
+  /** ISO date "YYYY-MM-DD". Used for the under-18 sign-in block (C1.1). */
+  dateOfBirth: date("date_of_birth"),
+  /** Set when an account is suspended — auth endpoints reject suspended users. */
+  suspendedAt: timestamp("suspended_at", { withTimezone: true, mode: "string" }),
   deletedAt: timestamp("deleted_at", { withTimezone: true, mode: "string" }),
   createdAt,
   updatedAt,
