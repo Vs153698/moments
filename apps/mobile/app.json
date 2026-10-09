@@ -15,10 +15,29 @@
       },
       "infoPlist": {
         "UIUserInterfaceStyle": "Automatic"
-      }
+      },
+      "associatedDomains": [
+        "applinks:moments.app"
+      ]
     },
     "android": {
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "moments.app"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "plugins": [
       [

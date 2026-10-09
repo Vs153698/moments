@@ -5,5 +5,5 @@
     "noUncheckedIndexedAccess": true,
     "moduleResolution": "bundler"
   },
-  "include": ["src", "index.js", "tailwind.config.js", "babel.config.js", "metro.config.js"]
+  "include": ["app", "src", "tailwind.config.js", "babel.config.js", "metro.config.js"]
 }
