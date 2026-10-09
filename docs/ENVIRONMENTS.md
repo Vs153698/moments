@@ -42,8 +42,10 @@ All API variables are validated by `apps/api/src/config/env.ts` (zod). Copy
 
 ### Mobile (EAS)
 
-`EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_SENTRY_DSN`, `EXPO_PUBLIC_POSTHOG_KEY`,
-`EXPO_PUBLIC_POSTHOG_HOST` — set per EAS build profile (see `apps/mobile/eas.json`).
+`EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_GOOGLE_CLIENT_ID`, `EXPO_PUBLIC_SENTRY_DSN`,
+`EXPO_PUBLIC_POSTHOG_KEY`, `EXPO_PUBLIC_POSTHOG_HOST` — set per EAS build
+profile (see `apps/mobile/eas.json`). `EXPO_PUBLIC_GOOGLE_CLIENT_ID` is
+required for the `expo-auth-session` Google sign-in flow (KAN-33).
 
 ## Secrets policy
 

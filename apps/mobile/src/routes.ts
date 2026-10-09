@@ -18,9 +18,10 @@ export const ROUTES: RouteInfo[] = [
   // Auth (C1/C2 land here)
   { path: "/(auth)/splash", title: "Splash", group: "auth", implemented: true },
   { path: "/(auth)/onboarding", title: "Onboarding carousel", group: "auth", implemented: true },
-  { path: "/(auth)/phone", title: "Phone sign-in", group: "auth", implemented: false },
+  { path: "/(auth)/phone", title: "Sign in / Sign up", group: "auth", implemented: true },
   { path: "/(auth)/otp", title: "OTP verification", group: "auth", implemented: false },
   { path: "/(auth)/profile-setup", title: "Profile setup", group: "auth", implemented: false },
+  { path: "/(auth)/support", title: "Support", group: "auth", implemented: true },
   // Tabs
   { path: "/(tabs)", title: "Home", group: "tabs", implemented: false },
   { path: "/(tabs)/explore", title: "Explore", group: "tabs", implemented: false },

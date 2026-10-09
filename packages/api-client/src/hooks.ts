@@ -1,5 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { ApiClient, CreateMomentRequest, HealthResponse } from "./client";
+import type {
+  ApiClient,
+  AppleSignInRequest,
+  CreateMomentRequest,
+  GoogleSignInRequest,
+  HealthResponse,
+  RequestOtpRequest,
+  VerifyOtpRequest,
+} from "./client";
 
 /** Query key factories — single source of truth for cache keys. */
 export const momentKeys = {
@@ -55,5 +63,29 @@ export function useCreateMoment(client: ApiClient) {
     onSettled: () => {
       void queryClient.invalidateQueries({ queryKey: momentKeys.lists() });
     },
+  });
+}
+
+export function useRequestOtp(client: ApiClient) {
+  return useMutation({
+    mutationFn: (input: RequestOtpRequest) => client.requestOtp(input),
+  });
+}
+
+export function useVerifyOtp(client: ApiClient) {
+  return useMutation({
+    mutationFn: (input: VerifyOtpRequest) => client.verifyOtp(input),
+  });
+}
+
+export function useGoogleSignIn(client: ApiClient) {
+  return useMutation({
+    mutationFn: (input: GoogleSignInRequest) => client.googleSignIn(input),
+  });
+}
+
+export function useAppleSignIn(client: ApiClient) {
+  return useMutation({
+    mutationFn: (input: AppleSignInRequest) => client.appleSignIn(input),
   });
 }
