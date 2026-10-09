@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @moments/web run build",
+  "outputDirectory": "apps/web/dist",
+  "regions": ["bom1"],
+  "github": {
+    "deploymentEnabled": {
+      "main": true,
+      "staging": true
+    }
+  }
+}
