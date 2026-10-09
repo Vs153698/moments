@@ -121,6 +121,138 @@
           "moments"
         ]
       }
+    },
+    "/v1/auth/otp/request": {
+      "post": {
+        "description": "Issues a 6-digit OTP (5-min validity, 5/hour/phone). Outside production the OTP is returned in `devOtp` for on-screen display during dev testing; production sends via MSG91.",
+        "operationId": "OtpController_request",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "example": "+919876543210"
+                  }
+                },
+                "required": [
+                  "phone"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OTP issued (devOtp present in dev mode)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "channel": {
+                      "type": "string",
+                      "enum": [
+                        "dev_screen",
+                        "sms",
+                        "whatsapp"
+                      ]
+                    },
+                    "expiresInSeconds": {
+                      "type": "number"
+                    },
+                    "devOtp": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "VALIDATION_ERROR | OTP_RATE_LIMITED"
+          }
+        },
+        "summary": "Request a phone OTP",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/otp/verify": {
+      "post": {
+        "operationId": "OtpController_verify",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "example": "+919876543210"
+                  },
+                  "code": {
+                    "type": "string",
+                    "example": "123456"
+                  }
+                },
+                "required": [
+                  "phone",
+                  "code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "OTP_INVALID | OTP_EXPIRED"
+          },
+          "401": {
+            "description": "OTP_WRONG | OTP_LOCKED | TOKEN_INVALID"
+          }
+        },
+        "summary": "Verify OTP and receive a dev session token (7-day expiry)",
+        "tags": [
+          "auth"
+        ]
+      }
     }
   },
   "info": {
