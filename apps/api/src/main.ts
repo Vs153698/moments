@@ -5,6 +5,7 @@ import type { Express } from "express";
 import { AppModule } from "./app.module";
 import { APP_ENV } from "./config/env";
 import { initSentry } from "./common/sentry";
+import { initPostHog, shutdownPostHog } from "./common/posthog";
 import helmet from "helmet";
 
 async function bootstrap() {
@@ -12,6 +13,7 @@ async function bootstrap() {
   const env = app.get(APP_ENV);
 
   initSentry(env);
+  initPostHog(env);
   app.use(helmet());
 
   const config = new DocumentBuilder()
@@ -36,6 +38,9 @@ async function bootstrap() {
       openapi: `http://localhost:${env.PORT}/v1/openapi.json`,
     }),
   );
+
+  app.enableShutdownHooks();
+  process.on("beforeExit", () => void shutdownPostHog());
 }
 
 void bootstrap();
