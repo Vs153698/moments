@@ -75,6 +75,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/auth/google": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sign in / sign up with Google
+         * @description Verifies the Google ID token, links the provider account by verified email (no duplicate accounts), blocks under-18 and suspended accounts, and issues a token pair.
+         */
+        post: operations["SocialController_google"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/apple": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sign in / sign up with Apple
+         * @description Verifies the Apple identity token against Apple's JWKS, links by email when present, blocks under-18 and suspended accounts, and issues a token pair.
+         */
+        post: operations["SocialController_apple"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/refresh": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Rotate the refresh token
+         * @description Exchanges a refresh token for a fresh access + refresh pair. The presented token is invalidated; presenting an already-rotated token revokes the whole session (reuse detection).
+         */
+        post: operations["SessionsController_refresh"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sign out
+         * @description Deletes the session server-side; the refresh token stops working immediately. Idempotent.
+         */
+        post: operations["SessionsController_logout"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -250,6 +330,194 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    SocialController_google: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    idToken: string;
+                    deviceName?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Token pair; isNewUser=true flags first-time users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        user?: {
+                            id?: string;
+                            handle?: string;
+                            displayName?: string;
+                            email?: string | null;
+                            avatarUrl?: string | null;
+                        };
+                        isNewUser?: boolean;
+                        accessToken?: string;
+                        /** Format: date-time */
+                        accessTokenExpiresAt?: string;
+                        refreshToken?: string;
+                        /** Format: date-time */
+                        refreshTokenExpiresAt?: string;
+                    };
+                };
+            };
+            /** @description INVALID_ID_TOKEN | EMAIL_NOT_VERIFIED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description UNDERAGE_BLOCK | ACCOUNT_SUSPENDED | ACCOUNT_DELETED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    SocialController_apple: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    idToken: string;
+                    deviceName?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Token pair; isNewUser=true flags first-time users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        user?: {
+                            id?: string;
+                            handle?: string;
+                            displayName?: string;
+                            email?: string | null;
+                            avatarUrl?: string | null;
+                        };
+                        isNewUser?: boolean;
+                        accessToken?: string;
+                        /** Format: date-time */
+                        accessTokenExpiresAt?: string;
+                        refreshToken?: string;
+                        /** Format: date-time */
+                        refreshTokenExpiresAt?: string;
+                    };
+                };
+            };
+            /** @description INVALID_ID_TOKEN */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description UNDERAGE_BLOCK | ACCOUNT_SUSPENDED | ACCOUNT_DELETED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    SessionsController_refresh: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    refreshToken: string;
+                    deviceName?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description New token pair */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        accessToken?: string;
+                        /** Format: date-time */
+                        accessTokenExpiresAt?: string;
+                        refreshToken?: string;
+                        /** Format: date-time */
+                        refreshTokenExpiresAt?: string;
+                        sessionId?: string;
+                    };
+                };
+            };
+            /** @description TOKEN_INVALID | TOKEN_EXPIRED | REFRESH_REUSE_DETECTED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description ACCOUNT_SUSPENDED | ACCOUNT_DELETED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    SessionsController_logout: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    refreshToken: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        revoked?: boolean;
+                    };
+                };
             };
         };
     };
