@@ -11,19 +11,46 @@ export interface Logger {
   error(msg: string, ctx?: Record<string, unknown>): void;
 }
 
-export function createLogger(level: LogLevel = "info", out: Pick<Console, "log"> = console): Logger {
+/** Fire-and-forget log shipper (Better Stack ingest, F8). */
+export interface LogDrain {
+  (line: string): void;
+}
+
+const BETTERSTACK_INGEST = "https://in.logs.betterstack.com";
+
+/**
+ * Drain that ships each JSON log line to Better Stack when a source token is
+ * configured. Fetch failures are swallowed — logging must never crash the API.
+ */
+export function betterStackDrain(sourceToken: string, fetchImpl: typeof fetch = fetch): LogDrain {
+  return (line: string) => {
+    void fetchImpl(`${BETTERSTACK_INGEST}/${sourceToken}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: line,
+    }).catch(() => {
+      /* best-effort */
+    });
+  };
+}
+
+export function createLogger(
+  level: LogLevel = "info",
+  out: Pick<Console, "log"> = console,
+  drain?: LogDrain,
+): Logger {
   const min = ORDER[level];
   const write = (lvl: LogLevel, msg: string, ctx?: Record<string, unknown>) => {
     if (ORDER[lvl] < min) return;
-    out.log(
-      JSON.stringify({
-        level: lvl,
-        time: new Date().toISOString(),
-        msg,
-        pid: process.pid,
-        ...(ctx ?? {}),
-      }),
-    );
+    const line = JSON.stringify({
+      level: lvl,
+      time: new Date().toISOString(),
+      msg,
+      pid: process.pid,
+      ...(ctx ?? {}),
+    });
+    out.log(line);
+    drain?.(line);
   };
   return {
     debug: (msg, ctx) => write("debug", msg, ctx),

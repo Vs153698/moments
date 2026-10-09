@@ -10,6 +10,9 @@ export const EnvSchema = z.object({
   DATABASE_URL: z.string().url().optional(),
   REDIS_URL: z.string().url().optional(),
   SENTRY_DSN: z.string().url().optional(),
+  POSTHOG_KEY: z.string().min(1).optional(),
+  POSTHOG_HOST: z.string().url().default("https://us.i.posthog.com"),
+  BETTERSTACK_SOURCE_TOKEN: z.string().min(1).optional(),
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
 });
 

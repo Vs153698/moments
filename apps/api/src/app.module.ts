@@ -1,7 +1,7 @@
 import { Module, type LoggerService } from "@nestjs/common";
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { APP_ENV, parseEnv } from "./config/env";
-import { APP_LOGGER, createLogger } from "./common/logger";
+import { APP_LOGGER, betterStackDrain, createLogger } from "./common/logger";
 import { GlobalExceptionFilter } from "./common/global-exception.filter";
 import { HealthController } from "./health/health.controller";
 import { DatabaseService, HealthService } from "./health/health.service";
@@ -18,7 +18,8 @@ import { RedisService } from "./redis/redis.service";
     { provide: APP_ENV, useFactory: () => parseEnv() },
     {
       provide: APP_LOGGER,
-      useFactory: (env: ReturnType<typeof parseEnv>) => createLogger(env.LOG_LEVEL),
+      useFactory: (env: ReturnType<typeof parseEnv>) =>
+        createLogger(env.LOG_LEVEL, console, env.BETTERSTACK_SOURCE_TOKEN ? betterStackDrain(env.BETTERSTACK_SOURCE_TOKEN) : undefined),
       inject: [APP_ENV],
     },
     {
