@@ -4,8 +4,9 @@ import { hasCompletedOnboarding } from "../../src/auth/onboarding";
 
 /**
  * S1 Splash route (KAN-114). Create Account runs first-run users through the
- * S2 carousel; everyone else goes straight to phone sign-up. Social buttons
- * land on the phone flow until C2b (KAN-33) wires the token handlers.
+ * S2 carousel; everyone else goes to the unified S2a sign in / sign up screen
+ * (KAN-33). Social buttons also lead to that screen so there is one clear
+ * entry point for all auth methods.
  */
 export default function SplashRoute() {
   return (
