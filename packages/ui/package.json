@@ -23,7 +23,17 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.76"
+  },
   "devDependencies": {
+    "@types/react": "~18.3.12",
+    "@types/react-test-renderer": "^19.3.0",
+    "nativewind": "^4.1.23",
+    "react": "18.3.1",
+    "react-native": "0.76.5",
+    "react-test-renderer": "18.3.1",
     "tsx": "^4.0.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
