@@ -41,6 +41,19 @@ module.exports = tseslint.config(
         },
       ],
       "@moments/no-select-star": "error",
+      "@moments/no-hardcoded-hex": [
+        "error",
+        {
+          allow: [
+            "packages/ui/src/tokens\\.ts$",
+            "packages/ui/scripts/.*",
+            "packages/ui/src/.*\\.spec\\.ts$",
+            "packages/config/tests/.*",
+            "\\.css$",
+            "apps/mobile/assets/.*",
+          ],
+        },
+      ],
     },
   },
 );
