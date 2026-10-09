@@ -16,6 +16,8 @@ export interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   // Auth (C1/C2 land here)
+  { path: "/(auth)/splash", title: "Splash", group: "auth", implemented: true },
+  { path: "/(auth)/onboarding", title: "Onboarding carousel", group: "auth", implemented: true },
   { path: "/(auth)/phone", title: "Phone sign-in", group: "auth", implemented: false },
   { path: "/(auth)/otp", title: "OTP verification", group: "auth", implemented: false },
   { path: "/(auth)/profile-setup", title: "Profile setup", group: "auth", implemented: false },
