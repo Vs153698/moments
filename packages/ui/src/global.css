@@ -1,0 +1,33 @@
+/* GENERATED from packages/ui/src/tokens.ts — do not edit by hand.
+   Regenerate: pnpm --filter @moments/ui run gen:css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #FFFFFF;
+  --color-surface: #F6F6F9;
+  --color-surface-alt: #ECECF2;
+  --color-primary: #6D5DF6;
+  --color-on-primary: #FFFFFF;
+  --color-text: #17171F;
+  --color-text-muted: #5A5A66;
+  --color-border: #DCDCE4;
+  --color-danger: #D93A3A;
+  --color-on-danger: #FFFFFF;
+  --color-success: #1E8A4C;
+}
+
+.dark {
+  --color-background: #121218;
+  --color-surface: #1C1C26;
+  --color-surface-alt: #262633;
+  --color-primary: #8B7DFF;
+  --color-on-primary: #121218;
+  --color-text: #F2F2F7;
+  --color-text-muted: #9C9CA8;
+  --color-border: #34343F;
+  --color-danger: #F26D6D;
+  --color-on-danger: #121218;
+  --color-success: #4CC97E;
+}

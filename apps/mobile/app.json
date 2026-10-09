@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Moments",
+    "slug": "moments",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "scheme": "moments",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "icon": "./assets/icon-light.png",
+    "ios": {
+      "supportsTablet": true,
+      "icon": {
+        "dark": "./assets/icon-dark.png"
+      },
+      "infoPlist": {
+        "UIUserInterfaceStyle": "Automatic"
+      }
+    },
+    "android": {
+      "userInterfaceStyle": "automatic"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "dark": {
+            "backgroundColor": "#121218"
+          }
+        }
+      ]
+    ]
+  }
+}
